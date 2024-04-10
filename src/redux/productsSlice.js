@@ -22,7 +22,7 @@ const productsSlice = createSlice({ //configuro el objeto
     },
     deleteProduct: (state, action) => {
       const id = action.payload; // desestructuro id
-      state.data = state.data.products.filter((product) => product.id !== id); // cuando product.id sea diferente de id lo dejas pasar, cuando no lo descartas
+      state.data = state.data.products.filter((product) => product.id !== id); 
     },
   },
 });

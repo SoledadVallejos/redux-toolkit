@@ -1,9 +1,11 @@
+// Se crea la estructura del slice. Slice --> "pedacito o rebanada".
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const usersSlice = createSlice({
     name: "users",//name -> identifica redux toolkit
     initialState: [],
-    reducers: { // los reducers seran las funciones -> las operaciones 
+    reducers: { // los reducers seran las funciones 
         fetchUsers: (state, action) => {
             return action.payload // devuelve el payload -> data 
         }
@@ -15,7 +17,7 @@ export const { fetchUsers } = usersSlice.actions;  // "usersSlice" IMPLEMENTACIO
 
 export default usersSlice.reducer; // exporto el reducer que luego sera usado en el store --> EXPORT REDUCER
 
-//al exportarlo por default le puedo poner el nombre que yo quiera as usersReducer. Y al usar exportacion defaulf no se usa destructuracion " sin {}"
+// export por default -> asignacion de nombre "usersReducer" - sin desestructurar"
 
 
 
@@ -39,22 +41,3 @@ export default usersSlice.reducer; // exporto el reducer que luego sera usado en
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-// Se crea la estructura del slice. Slice --> "pedacito o rebanada".
-
-/* (state, action)
-
-action --> contiene la data
-payload --> valor que se le pega a la data
-
-*/

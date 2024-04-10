@@ -9,11 +9,11 @@ import {
 } from "../redux/productsSlice";
 
 const ProductsList = () => {
-  const products = useSelector((state) => state.products); // data que viene de la api || products es state.products y este state.productus es un objeto que dentro tiene una propiedad llamada data que es donde se cargan esos datos "initialState"
+  const products = useSelector((state) => state.products); // data que viene de la api || state.productus es un objeto que dentro tiene una propiedad llamada data que es donde se cargan esos datos "initialState"
   const dispatch = useDispatch();
 
-  const [newProductName, setNewProductName] = useState(""); // controla lo que introduce el usuario en ese input
-  const [editedProduct, setEditedProduct] = useState(null); // controla lo que introduce el usuario en ese input
+  const [newProductName, setNewProductName] = useState(""); 
+  const [editedProduct, setEditedProduct] = useState(null); 
 
   useEffect(() => {
     axios
@@ -26,27 +26,27 @@ const ProductsList = () => {
   }, [dispatch]);
 
   const handleCreateProduct = () => {
-    if (newProductName) {//se valida que exista newProductName
-      const newProduct = { id: Date.now(), name: newProductName }; //utiliza el met de la fecha para establecerlo como el id del producto
-      dispatch(createProduct(newProduct)); // EL DISPATCH ESTADO VIRTUAL QUE ME GENERA REDUX TOLK PARA LA APP FRONT
+    if (newProductName) {
+      const newProduct = { id: Date.now(), name: newProductName }; // metodo de la fecha -> id
+      dispatch(createProduct(newProduct)); // EL DISPATCH ESTADO VIRTUAL QUE ME GENERA REDUX TOOLKIT PARA LA APP FRONT
 
-      axios // LA PETICION AXIOS ES PARA PEGARLE AL SERVIDOR
-        .post("http://localhost:3001/products", newProduct) //pega a la api con el post para guardar la info
+      axios // LA PETICION -> PEGA AL SERVIDOR
+        .post("http://localhost:3001/products", newProduct) //guarda la info
         .then(() => {
-          setNewProductName("");//limpia el valor del input
+          setNewProductName("");
         })
         .catch((err) => console.error(err));
     }
   };
 
   const handleUpdateProduct = () => {
-    if (editedProduct) { // si editedProduct tiene valor  ejecuto el dispatch 
+    if (editedProduct) { 
       dispatch(
         updateProduct({ id: editedProduct.id, name: editedProduct.name })
       );
 
       axios
-        .put(`http://localhost:3001/products/${editedProduct.id}`, {// paso el id y la data a actualizar
+        .put(`http://localhost:3001/products/${editedProduct.id}`, {// id y data a actualizar
           name: editedProduct.name,
         })
         .then(() => setEditedProduct(null))
@@ -58,7 +58,7 @@ const ProductsList = () => {
     dispatch(deleteProduct(id)); 
 
     axios
-      .delete(`http://localhost:3001/products/${id}`)// concatena el id
+      .delete(`http://localhost:3001/products/${id}`)// id
       .catch((err) => console.error(err));
   };
 
@@ -76,7 +76,7 @@ const ProductsList = () => {
                   type="text"
                   value={editedProduct.name}
                   onChange={(e) =>
-                    setEditedProduct({ ...editedProduct, name: e.target.value }) // lo q venga de editedProduct desdestructura con lo q el usuario escriba --> no se piere el id 
+                    setEditedProduct({ ...editedProduct, name: e.target.value }) // desestructura con lo que el usuario escriba --> no se pierde el id 
                   }
                 />
                 <button onClick={handleUpdateProduct}>Actualizar</button>
@@ -87,7 +87,7 @@ const ProductsList = () => {
                 <button onClick={() => setEditedProduct(product)}> {/* le pasamos todo el product --> inicialmente empieza en null */}
                   Editar
                 </button>
-                <button onClick={() => handleDeleteProduct(product.id)}> {/* id del  producto en cuestion  */}
+                <button onClick={() => handleDeleteProduct(product.id)}> {/* id del producto en cuestion */}
                   Eliminar
                 </button>
               </div>
@@ -98,8 +98,8 @@ const ProductsList = () => {
       <aside>
         <input
           type="text"
-          value={newProductName}//vinvulo el valor de la variable newProductName
-          onChange={(e) => setNewProductName(e.target.value)} // y al cambio lo vinculo setNewProductName con lo que el usuario escriba
+          value={newProductName}// valor de la variable newProductName
+          onChange={(e) => setNewProductName(e.target.value)} // cambio lo vinculo setNewProductName -> usuario
         />
         <button onClick={handleCreateProduct}>Agregar Producto</button>
       </aside>
